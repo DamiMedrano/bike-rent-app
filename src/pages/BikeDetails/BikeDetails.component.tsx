@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Box, Breadcrumbs, Divider, Link, Typography } from '@mui/material'
 import BikeImageSelector from 'components/BikeImageSelector'
 import BikeSpecs from 'components/BikeSpecs'
@@ -12,6 +13,7 @@ import {
   BreadcrumbHome,
   BreadcrumbSeparator,
   Content,
+  DateRangePickerContainer,
   DetailsContainer,
   FavoriteIcon,
   InfoIcon,
@@ -19,6 +21,10 @@ import {
   OverviewContainer,
   PriceRow,
 } from './BikeDetails.styles'
+
+import { DateRange } from 'react-date-range'
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
 
 interface BikeDetailsProps {
   bike?: Bike
@@ -29,7 +35,49 @@ const BikeDetails = ({ bike }: BikeDetailsProps) => {
   const rateByWeek = rateByDay * 7
 
   const servicesFee = getServicesFee(rateByDay)
-  const total = rateByDay + servicesFee
+  const [total, setTotal] = useState(0)
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: 'selection',
+    },
+  ])
+
+  const handleRangeChange = (item: any) => {
+    const selectedRange = item.selection
+
+    if (selectedRange.startDate && selectedRange.endDate) {
+      if (range.length === 1 && !range[0].endDate) {
+        // First click, update only the end date
+        const updatedRange = [
+          {
+            startDate: range[0].startDate,
+            endDate: selectedRange.endDate,
+            key: 'selection',
+          },
+        ]
+        setRange(updatedRange)
+      } else {
+        // Second click, calculate the number of days
+        const start = selectedRange.startDate
+        const end = selectedRange.endDate
+        const days = Math.floor((end - start) / (1000 * 60 * 60 * 24)) + 1
+
+        // Update the range
+        setRange([selectedRange])
+
+        // Calculate the new total
+        const newTotal = rateByDay * days + servicesFee
+        setTotal(newTotal)
+      }
+    } else {
+      setRange([selectedRange])
+
+      // Reset the total
+      setTotal(0)
+    }
+  }
 
   return (
     <div data-testid='bike-details-page'>
@@ -103,7 +151,7 @@ const BikeDetails = ({ bike }: BikeDetailsProps) => {
 
           <Box marginTop={3.25}>
             <Typography variant='h1' fontSize={24} fontWeight={800}>
-              Full adress after booking
+              Full address after booking
             </Typography>
 
             <BookingAddressMap />
@@ -111,6 +159,17 @@ const BikeDetails = ({ bike }: BikeDetailsProps) => {
         </DetailsContainer>
 
         <OverviewContainer variant='outlined' data-testid='bike-overview-container'>
+          <Typography variant='h1' fontSize={24} marginBottom={1.25} fontWeight={800}>
+            Select date and time
+          </Typography>
+          <DateRangePickerContainer>
+            <DateRange
+              editableDateInputs={true}
+              onChange={handleRangeChange}
+              moveRangeOnFirstSelection={false}
+              ranges={range as any}
+            />
+          </DateRangePickerContainer>
           <Typography variant='h2' fontSize={16} marginBottom={1.25}>
             Booking Overview
           </Typography>
