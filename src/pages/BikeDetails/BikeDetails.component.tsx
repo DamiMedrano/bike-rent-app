@@ -20,6 +20,7 @@ import {
   LikeButton,
   OverviewContainer,
   PriceRow,
+  SuccessMessageBox,
 } from './BikeDetails.styles'
 
 import { DateRange } from 'react-date-range'
@@ -35,6 +36,7 @@ const BikeDetails = ({ bike }: BikeDetailsProps) => {
   const rateByWeek = rateByDay * 7
 
   const servicesFee = getServicesFee(rateByDay)
+  const [isSuccessMessageBoxVisible, setIsSuccessMessageBoxVisible] = useState(false)
   const [total, setTotal] = useState(0)
   const [range, setRange] = useState([
     {
@@ -76,6 +78,12 @@ const BikeDetails = ({ bike }: BikeDetailsProps) => {
 
       // Reset the total
       setTotal(0)
+    }
+  }
+
+  const handleBooking = () => {
+    if (total > 0) {
+      setIsSuccessMessageBoxVisible(true)
     }
   }
 
@@ -157,61 +165,77 @@ const BikeDetails = ({ bike }: BikeDetailsProps) => {
             <BookingAddressMap />
           </Box>
         </DetailsContainer>
-
-        <OverviewContainer variant='outlined' data-testid='bike-overview-container'>
-          <Typography variant='h1' fontSize={24} marginBottom={1.25} fontWeight={800}>
-            Select date and time
-          </Typography>
-          <DateRangePickerContainer>
-            <DateRange
-              editableDateInputs={true}
-              onChange={handleRangeChange}
-              moveRangeOnFirstSelection={false}
-              ranges={range as any}
-            />
-          </DateRangePickerContainer>
-          <Typography variant='h2' fontSize={16} marginBottom={1.25}>
-            Booking Overview
-          </Typography>
-
-          <Divider />
-
-          <PriceRow marginTop={1.75} data-testid='bike-overview-single-price'>
-            <Box display='flex' alignItems='center'>
-              <Typography marginRight={1}>Subtotal</Typography>
-              <InfoIcon fontSize='small' />
-            </Box>
-
-            <Typography>{rateByDay} €</Typography>
-          </PriceRow>
-
-          <PriceRow marginTop={1.5} data-testid='bike-overview-single-price'>
-            <Box display='flex' alignItems='center'>
-              <Typography marginRight={1}>Service Fee</Typography>
-              <InfoIcon fontSize='small' />
-            </Box>
-
-            <Typography>{servicesFee} €</Typography>
-          </PriceRow>
-
-          <PriceRow marginTop={1.75} data-testid='bike-overview-total'>
-            <Typography fontWeight={800} fontSize={16}>
-              Total
+        {isSuccessMessageBoxVisible ? (
+          <SuccessMessageBox variant='outlined' data-testid='success-message-container'>
+            <Typography variant='h1' fontSize={24} marginBottom={1.25} fontWeight={800}>
+              Thank you!
             </Typography>
-            <Typography variant='h2' fontSize={24} letterSpacing={1}>
-              {total} €
+            <Typography marginTop={1.5} fontSize={16} marginBottom={2}>
+              You bike is booked.
             </Typography>
-          </PriceRow>
+            <img src={bike?.imageUrls[0]} style={{ width: '185px' }} />
+            <Typography variant='h2' fontSize={16} marginBottom={0.4} marginTop={2}>
+              {bike?.name}
+            </Typography>
+            <BikeType type={bike?.type} />
+          </SuccessMessageBox>
+        ) : (
+          <OverviewContainer variant='outlined' data-testid='bike-overview-container'>
+            <Typography variant='h1' fontSize={24} marginBottom={1.25} fontWeight={800}>
+              Select date and time
+            </Typography>
+            <DateRangePickerContainer>
+              <DateRange
+                editableDateInputs={true}
+                onChange={handleRangeChange}
+                moveRangeOnFirstSelection={false}
+                ranges={range as any}
+              />
+            </DateRangePickerContainer>
+            <Typography variant='h2' fontSize={16} marginBottom={1.25}>
+              Booking Overview
+            </Typography>
 
-          <BookingButton
-            fullWidth
-            disableElevation
-            variant='contained'
-            data-testid='bike-booking-button'
-          >
-            Add to booking
-          </BookingButton>
-        </OverviewContainer>
+            <Divider />
+
+            <PriceRow marginTop={1.75} data-testid='bike-overview-single-price'>
+              <Box display='flex' alignItems='center'>
+                <Typography marginRight={1}>Subtotal</Typography>
+                <InfoIcon fontSize='small' />
+              </Box>
+
+              <Typography>{rateByDay} €</Typography>
+            </PriceRow>
+
+            <PriceRow marginTop={1.5} data-testid='bike-overview-single-price'>
+              <Box display='flex' alignItems='center'>
+                <Typography marginRight={1}>Service Fee</Typography>
+                <InfoIcon fontSize='small' />
+              </Box>
+
+              <Typography>{servicesFee} €</Typography>
+            </PriceRow>
+
+            <PriceRow marginTop={1.75} data-testid='bike-overview-total'>
+              <Typography fontWeight={800} fontSize={16}>
+                Total
+              </Typography>
+              <Typography variant='h2' fontSize={24} letterSpacing={1}>
+                {total} €
+              </Typography>
+            </PriceRow>
+
+            <BookingButton
+              fullWidth
+              disableElevation
+              variant='contained'
+              data-testid='bike-booking-button'
+              onClick={handleBooking}
+            >
+              Add to booking
+            </BookingButton>
+          </OverviewContainer>
+        )}
       </Content>
     </div>
   )

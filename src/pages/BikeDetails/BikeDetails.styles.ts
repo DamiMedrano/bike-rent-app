@@ -49,7 +49,7 @@ export const Content = styled(Box)<BoxProps>(({ theme }) => ({
 }))
 
 // customization of DateRange predefined styles
-export const DateRangePickerContainer = styled(Box)<BoxProps>(({ theme }) => ({
+export const DateRangePickerContainer = styled(Box)<BoxProps>(() => ({
   paddingBottom: 28,
   '&& .rdrCalendarWrapper': {
     background: '#1F49D1',
@@ -156,4 +156,16 @@ export const PriceRow = styled(Box)<BoxProps>(() => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+}))
+
+export const SuccessMessageBox = styled(Card)<CardProps>(({ theme }) => ({
+  borderColor: theme.palette.grey[500],
+  padding: 34,
+  display: 'flex',
+  alignContent: 'center',
+  flexDirection: 'column',
+  alignItems: 'center',
+  height: 423,
+  justifyContent: 'center',
+  minWidth: 400,
 }))
