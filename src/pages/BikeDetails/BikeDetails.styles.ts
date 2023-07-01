@@ -48,6 +48,70 @@ export const Content = styled(Box)<BoxProps>(({ theme }) => ({
   },
 }))
 
+// customization of DateRange predefined styles
+export const DateRangePickerContainer = styled(Box)<BoxProps>(({ theme }) => ({
+  paddingBottom: 28,
+  '&& .rdrCalendarWrapper': {
+    background: '#1F49D1',
+    paddingLeft: 20,
+    paddingRight: 20,
+    width: '100%',
+    borderRadius: 20,
+    boxShadow: '0px 10px 70px 0px rgba(0, 0, 0, 0.2)',
+
+    ' .rdrDateDisplayWrapper': {
+      display: 'none',
+    },
+    ' .rdrMonthPicker > select': {
+      color: '#fafafa',
+    },
+    ' .rdrMonthPicker > select > option': {
+      color: '#1E3280',
+    },
+    ' .rdrYearPicker > select': {
+      color: '#fafafa',
+    },
+    ' .rdrYearPicker > select > option': {
+      color: '#1E3280',
+    },
+    ' .rdrMonths': {
+      alignItems: 'center',
+    },
+    ' .rdrDay > span > span': {
+      color: '#fafafa',
+    },
+    ' .rdrDayPassive > span > span': {
+      color: '#8FA4E8',
+    },
+    ' .rdrMonth': {
+      minWidth: '100%',
+    },
+    ' .rdrNextPrevButton': {
+      width: 52,
+      height: 48,
+      margin: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      border: '1px solid #fafafa',
+      background: 'none',
+      color: '#fafafa',
+      borderRadius: '40%',
+    },
+    ' .rdrNextPrevButton > i': {
+      margin: 0,
+    },
+    ' .rdrNextButton > i': {
+      borderWidth: '7px 3px 6px 10px',
+      borderColor: 'transparent transparent transparent #fafafa',
+    },
+    ' .rdrPprevButton > i': {
+      borderWidth: '7px 10px 6px 3px',
+      borderColor: 'transparent #fafafa transparent transparent',
+    },
+  },
+}))
+
 export const DetailsContainer = styled(Card)<CardProps>(({ theme }) => ({
   borderColor: theme.palette.grey[500],
   padding: 34,
@@ -75,7 +139,8 @@ export const InfoIcon = styled(InfoOutlined)(({ theme }) => ({
 export const OverviewContainer = styled(Card)<CardProps>(({ theme }) => ({
   borderColor: theme.palette.grey[500],
   padding: 34,
-  maxHeight: 295,
+  maxHeight: 700,
+  minWidth: 400,
 }))
 
 export const BookingButton = styled(Button)<ButtonProps>(({ theme }) => ({
