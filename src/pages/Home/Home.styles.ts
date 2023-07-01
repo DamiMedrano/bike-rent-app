@@ -9,4 +9,10 @@ export const Content = styled(Box)(({ theme }) => ({
   },
 }))
 
-
+export const Loading = styled(Box)(() => ({
+  height: '100vh',
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}))
