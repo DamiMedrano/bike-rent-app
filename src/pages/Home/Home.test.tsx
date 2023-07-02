@@ -4,7 +4,6 @@ import { mockedBikesArray } from 'mocks/Bike'
 import Home from './Home.component'
 
 describe('Home page', () => {
-
   it('should has a header', () => {
     render(
       <BrowserRouter>
@@ -15,14 +14,25 @@ describe('Home page', () => {
     expect(headerElement).toBeInTheDocument()
   })
 
-  it('should has a bikes list', () => {
+  it('should display the bike list component when the bikes array is not empty', () => {
     render(
       <BrowserRouter>
         <Home appIsNotConfigured={false} bikes={mockedBikesArray} />
       </BrowserRouter>,
     )
-    const listElement = screen.getByTestId('bikes-list')
-    expect(listElement).toBeInTheDocument()
+    const bikeListElement = screen.getByTestId('bikes-list')
+    expect(bikeListElement).toBeInTheDocument()
+  })
+
+  it('should display the loading component when the bikes array is empty', () => {
+    render(
+      <BrowserRouter>
+        <Home appIsNotConfigured={false} bikes={[]} />
+      </BrowserRouter>,
+    )
+
+    const loadingElement = screen.getByTestId('loading-message')
+    expect(loadingElement).toBeInTheDocument()
   })
 
   it('should display an error message', () => {

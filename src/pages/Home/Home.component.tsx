@@ -16,8 +16,8 @@ const Home = ({ appIsNotConfigured, bikes }: HomeProps) => {
 
       <Content>
         {bikes.length === 0 ? (
-          <Loading>
-            <h1>Loading...</h1>{' '}
+          <Loading data-testid='loading-message'>
+            <h1>Loading...</h1>
           </Loading>
         ) : (
           <BikeList bikes={bikes} />
