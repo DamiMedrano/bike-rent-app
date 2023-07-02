@@ -48,67 +48,143 @@ export const Content = styled(Box)<BoxProps>(({ theme }) => ({
   },
 }))
 
-// customization of DateRange predefined styles
-export const DateRangePickerContainer = styled(Box)<BoxProps>(() => ({
+// Updates required for DateRange predefined css
+export const DateRangePickerContainer = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'isMobile',
+})<BoxProps>(() => ({
   paddingBottom: 28,
+  margin: '0 -24px',
+  minWidth: 354,
+
   '&& .rdrCalendarWrapper': {
     background: '#1F49D1',
-    paddingLeft: 20,
-    paddingRight: 20,
+    padding: '10px 20px',
     width: '100%',
-    borderRadius: 20,
-    boxShadow: '0px 10px 70px 0px rgba(0, 0, 0, 0.2)',
+    borderRadius: 40,
+  },
 
-    ' .rdrDateDisplayWrapper': {
-      display: 'none',
+  ' .rdrDateDisplayWrapper': {
+    display: 'none',
+  },
+
+  ' .rdrMonthPicker': {
+    width: 80,
+  },
+
+  ' .rdrMonthPicker > select': {
+    color: '#fafafa',
+    fontSize: 34,
+    fontWeight: 600,
+    textAlign: 'left',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
+
+  ' .rdrMonthPicker > select > option': {
+    color: '#1E3280',
+    fontSize: 14,
+  },
+
+  ' .rdrMonthAndYearPickers': {
+    position: 'absolute',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    left: 0,
+  },
+
+  ' .rdrMonthAndYearWrapper': {
+    padding: 0,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    position: 'relative',
+    margin: '20px 0 40px',
+  },
+
+  ' .rdrMonthAndYearPickers > span > select': {
+    padding: '0px 30px 4px 0px',
+    pointerEvents: 'none',
+    '-webkit-appearance': 'none',
+    '-moz-appearance': 'none',
+    appearance: 'none',
+    background: 'url("") no-repeat right center',
+  },
+
+  ' .rdrYearPicker > select': {
+    color: '#8FA4E8',
+  },
+
+  ' .rdrYearPicker > select > option': {
+    color: '#1E3280',
+  },
+
+  ' .rdrMonths': {
+    alignItems: 'center',
+  },
+
+  ' .rdrMonth': {
+    width: '-webkit-fill-available',
+    padding: '0 0 20px',
+  },
+
+  ' .rdrDay > span > span': {
+    color: '#fafafa',
+  },
+
+  ' .rdrDayPassive > span > span': {
+    color: '#8FA4E8',
+  },
+
+  ' .rdrDayDisabled': {
+    backgroundColor: 'unset',
+    cursor: 'auto',
+  },
+
+  ' .rdrDayDisabled > span': {
+    filter: 'unset',
+  },
+
+  ' .rdrDayDisabled > .rdrInRange': {
+    background: 'none',
+  },
+
+  ' .rdrDayDisabled > .rdrDayNumber > span': {
+    color: '#8FA4E8 !important',
+  },
+
+  ' .rdrNextPrevButton': {
+    width: 52,
+    height: 48,
+    margin: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '1px solid #fafafa',
+    background: 'none',
+    color: '#fafafa',
+    borderRadius: '40%',
+    zIndex: 10,
+    '&:hover': {
+      background: '1px solid red',
     },
-    ' .rdrMonthPicker > select': {
-      color: '#fafafa',
-    },
-    ' .rdrMonthPicker > select > option': {
-      color: '#1E3280',
-    },
-    ' .rdrYearPicker > select': {
-      color: '#fafafa',
-    },
-    ' .rdrYearPicker > select > option': {
-      color: '#1E3280',
-    },
-    ' .rdrMonths': {
-      alignItems: 'center',
-    },
-    ' .rdrDay > span > span': {
-      color: '#fafafa',
-    },
-    ' .rdrDayPassive > span > span': {
-      color: '#8FA4E8',
-    },
-    ' .rdrMonth': {
-      minWidth: '100%',
-    },
-    ' .rdrNextPrevButton': {
-      width: 52,
-      height: 48,
-      margin: 0,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      border: '1px solid #fafafa',
-      background: 'none',
-      color: '#fafafa',
-      borderRadius: '40%',
-    },
-    ' .rdrNextPrevButton > i': {
-      margin: 0,
-    },
-    ' .rdrNextButton > i': {
-      borderWidth: '7px 3px 6px 10px',
-      borderColor: 'transparent transparent transparent #fafafa',
-    },
-    ' .rdrPprevButton > i': {
-      borderWidth: '7px 10px 6px 3px',
-      borderColor: 'transparent #fafafa transparent transparent',
-    },
+  },
+
+  ' .rdrNextPrevButton > i': {
+    margin: 0,
+  },
+
+  ' .rdrNextButton > i': {
+    borderWidth: '7px 3px 6px 10px',
+    borderColor: 'transparent transparent transparent #fafafa',
+  },
+
+  ' .rdrPprevButton': {
+    marginRight: 8,
+  },
+
+  ' .rdrPprevButton > i': {
+    borderWidth: '7px 10px 6px 3px',
+    borderColor: 'transparent #fafafa transparent transparent',
   },
 }))
 
@@ -139,8 +215,8 @@ export const InfoIcon = styled(InfoOutlined)(({ theme }) => ({
 export const OverviewContainer = styled(Card)<CardProps>(({ theme }) => ({
   borderColor: theme.palette.grey[500],
   padding: 34,
-  maxHeight: 700,
-  minWidth: 400,
+  height: 'fit-content',
+  minWidth: 'fit-content',
 }))
 
 export const BookingButton = styled(Button)<ButtonProps>(({ theme }) => ({
@@ -167,5 +243,4 @@ export const SuccessMessageBox = styled(Card)<CardProps>(({ theme }) => ({
   alignItems: 'center',
   height: 423,
   justifyContent: 'center',
-  minWidth: 400,
 }))

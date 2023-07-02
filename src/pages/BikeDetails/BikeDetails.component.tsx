@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Box, Breadcrumbs, Divider, Link, Typography } from '@mui/material'
 import BikeImageSelector from 'components/BikeImageSelector'
 import BikeSpecs from 'components/BikeSpecs'
@@ -34,50 +34,52 @@ interface BikeDetailsProps {
 const BikeDetails = ({ bike }: BikeDetailsProps) => {
   const rateByDay = bike?.rate || 0
   const rateByWeek = rateByDay * 7
-
+  const currentDate = new Date()
   const servicesFee = getServicesFee(rateByDay)
   const [isSuccessMessageBoxVisible, setIsSuccessMessageBoxVisible] = useState(false)
+  const [days, setDays] = useState(0)
   const [total, setTotal] = useState(0)
   const [range, setRange] = useState([
     {
-      startDate: new Date(),
+      startDate: null,
       endDate: null,
       key: 'selection',
     },
   ])
 
+  useEffect(() => {
+    if (days !== 0) {
+      const newTotal = rateByDay * days + servicesFee
+      setTotal(newTotal)
+    }
+  }, [rateByDay, days, servicesFee])
+
   const handleRangeChange = (item: any) => {
     const selectedRange = item.selection
 
     if (selectedRange.startDate && selectedRange.endDate) {
-      if (range.length === 1 && !range[0].endDate) {
-        // First click, update only the end date
-        const updatedRange = [
-          {
-            startDate: range[0].startDate,
-            endDate: selectedRange.endDate,
-            key: 'selection',
-          },
-        ]
-        setRange(updatedRange)
-      } else {
-        // Second click, calculate the number of days
-        const start = selectedRange.startDate
-        const end = selectedRange.endDate
-        const days = Math.floor((end - start) / (1000 * 60 * 60 * 24)) + 1
+      // Calculate the number of days and update the range
+      const start = selectedRange.startDate
+      const end = selectedRange.endDate
+      const newDays = Math.floor((end - start) / (1000 * 60 * 60 * 24)) + 1
 
-        // Update the range
-        setRange([selectedRange])
-
-        // Calculate the new total
-        const newTotal = rateByDay * days + servicesFee
-        setTotal(newTotal)
-      }
-    } else {
+      setDays(newDays)
       setRange([selectedRange])
+    } else {
+      setDays(0)
+      setRange([selectedRange])
+    }
 
-      // Reset the total
-      setTotal(0)
+    // Reset the range if the selected dates are in the past
+    const now = new Date()
+    if (selectedRange.startDate < now || selectedRange.endDate < now) {
+      setRange([
+        {
+          startDate: null,
+          endDate: null,
+          key: 'selection',
+        },
+      ])
     }
   }
 
@@ -185,12 +187,7 @@ const BikeDetails = ({ bike }: BikeDetailsProps) => {
               Select date and time
             </Typography>
             <DateRangePickerContainer>
-              <DateRange
-                editableDateInputs={true}
-                onChange={handleRangeChange}
-                moveRangeOnFirstSelection={false}
-                ranges={range as any}
-              />
+              <DateRange onChange={handleRangeChange} ranges={range as any} minDate={currentDate} />
             </DateRangePickerContainer>
             <Typography variant='h2' fontSize={16} marginBottom={1.25}>
               Booking Overview
@@ -204,7 +201,7 @@ const BikeDetails = ({ bike }: BikeDetailsProps) => {
                 <InfoIcon fontSize='small' />
               </Box>
 
-              <Typography>{rateByDay} €</Typography>
+              <Typography>{rateByDay * days} €</Typography>
             </PriceRow>
 
             <PriceRow marginTop={1.5} data-testid='bike-overview-single-price'>
