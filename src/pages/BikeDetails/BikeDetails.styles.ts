@@ -101,11 +101,11 @@ export const DateRangePickerContainer = styled(Box, {
     margin: '20px 0 40px',
   },
 
-  '.rdrMonthAndYearPickers > span > select': {
+  ' .rdrMonthAndYearPickers > span > select': {
     padding: '0px 30px 4px 0px',
     pointerEvents: 'none',
-    WebkitAppearance: 'none',
-    MozAppearance: 'none',
+    '-webkit-appearance': 'none',
+    '-moz-appearance': 'none',
     appearance: 'none',
     background: 'url("") no-repeat right center',
   },

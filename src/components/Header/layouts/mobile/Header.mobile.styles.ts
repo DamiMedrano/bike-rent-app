@@ -1,5 +1,3 @@
-import { useContext } from 'react'
-import { AppContext } from '../../../../AppContext'
 import {
   Box,
   Button,
@@ -12,47 +10,29 @@ import {
 import LocationOnOutlined from '@mui/icons-material/LocationOnOutlined'
 import Menu from '@mui/icons-material/Menu'
 
-export const Container = styled(Box)(({ theme }) => {
-  const { isMobileScreen, previewBike } = useContext(AppContext)
-  let backgroundColor: string = theme.palette.primary.main
-  if (isMobileScreen && previewBike) {
-    backgroundColor = theme.palette.white?.main || backgroundColor
-  }
+export const Container = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  display: 'flex',
+  flexDirection: 'column',
+  flex: 1,
+  width: '100%',
+  position: 'relative',
+  height: 250,
+  left: 0,
+  top: 0,
+  padding: '24px 8vw',
+  borderBottomLeftRadius: theme.shape.borderRadius,
+  borderBottomRightRadius: theme.shape.borderRadius,
+  marginBottom: -180,
+}))
 
-  return {
-    backgroundColor,
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    width: '100%',
-    position: 'relative',
-    height: 250,
-    left: 0,
-    top: 0,
-    padding: '24px 8vw',
-    borderBottomLeftRadius: theme.shape.borderRadius,
-    borderBottomRightRadius: theme.shape.borderRadius,
-    marginBottom: -180,
-  }
-})
+export const LocationIcon = styled(LocationOnOutlined)(({ theme }) => ({
+  color: theme.palette.common.white,
+}))
 
-export const LocationIcon = styled(LocationOnOutlined)(({ theme }) => {
-  const { isMobileScreen, previewBike } = useContext(AppContext)
-  let color: string = theme.palette.common.white
-  if (isMobileScreen && previewBike) {
-    color = theme.palette.common.black || color
-  }
-  return color
-})
-
-export const MenuIcon = styled(Menu)(({ theme }) => {
-  const { isMobileScreen, previewBike } = useContext(AppContext)
-  let color: string = theme.palette.common.white
-  if (isMobileScreen && previewBike) {
-    color = theme.palette.common.black || color
-  }
-  return color
-})
+export const MenuIcon = styled(Menu)(({ theme }) => ({
+  color: theme.palette.common.white,
+}))
 
 export const Actions = styled(Box)(() => ({
   display: 'flex',

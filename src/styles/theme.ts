@@ -4,18 +4,9 @@ declare module '@mui/material/styles' {
   interface Transitions {
     hover: string
   }
+
   interface TransitionsOptions {
     hover?: string
-  }
-  interface Palette {
-    white?: {
-      main: string
-    }
-  }
-  interface PaletteOptions {
-    white?: {
-      main: string
-    }
   }
 }
 
@@ -31,9 +22,6 @@ const theme = createTheme({
     },
     grey: {
       500: '#EDEDED',
-    },
-    white: {
-      main: '#fff',
     },
     common: {
       black: '#1B1B1B',
