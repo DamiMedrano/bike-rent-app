@@ -49,9 +49,7 @@ export const Content = styled(Box)<BoxProps>(({ theme }) => ({
 }))
 
 // Updates required for DateRange predefined css
-export const DateRangePickerContainer = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'isMobile',
-})<BoxProps>(() => ({
+export const DateRangePickerContainer = styled(Box)<BoxProps>(({ theme }) => ({
   '& .rdrCalendarWrapper': {
     background: '#1F49D1',
     borderRadius: 40,
@@ -129,6 +127,9 @@ export const DateRangePickerContainer = styled(Box, {
     textOverflow: 'ellipsis',
     textAlign: 'left',
     whiteSpace: 'nowrap',
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 24,
+    },
   },
 
   '& .rdrMonthPicker > select > option': {
@@ -184,7 +185,6 @@ export const DateRangePickerContainer = styled(Box, {
   },
 
   margin: '0 -24px',
-  minWidth: 354,
   paddingBottom: 28,
 }))
 
