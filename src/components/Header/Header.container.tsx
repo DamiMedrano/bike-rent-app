@@ -1,9 +1,9 @@
-import { useMediaQuery, useTheme } from '@mui/material'
+import { useContext } from 'react'
+import { AppContext } from '../../AppContext'
 import { DesktopHeader, MobileHeader } from './layouts'
 
 const HeaderContainer = () => {
-  const theme = useTheme()
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down('md'))
+  const { isMobileScreen } = useContext(AppContext)
 
   return isMobileScreen ? <MobileHeader /> : <DesktopHeader />
 }

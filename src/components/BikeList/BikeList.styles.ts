@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { AppContext } from '../../AppContext'
 import { Box, styled, BoxProps } from '@mui/material'
 
 export const Container = styled(Box)<BoxProps>(() => ({
@@ -16,12 +18,18 @@ export const QuantityContainer = styled(Box)<BoxProps>(({ theme }) => ({
   },
 }))
 
-export const ListContainer = styled(Box)<BoxProps>(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr 1fr',
-  gap: 25,
+export const ListContainer = styled(Box)<BoxProps>(({ theme }) => {
+  const { previewBike } = useContext(AppContext)
 
-  [theme.breakpoints.down('md')]: {
-    gridTemplateColumns: '1fr',
-  },
-}))
+  const display: string = previewBike ? 'none' : 'grid'
+
+  return {
+    display,
+    gridTemplateColumns: '1fr 1fr 1fr',
+    gap: 25,
+
+    [theme.breakpoints.down('md')]: {
+      gridTemplateColumns: '1fr',
+    },
+  }
+})
