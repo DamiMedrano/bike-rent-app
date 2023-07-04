@@ -224,6 +224,7 @@ const BikeDetails = ({ bike }: BikeDetailsProps) => {
 
             <BookingButton
               fullWidth
+              disabled={total === 0}
               disableElevation
               variant='contained'
               data-testid='bike-booking-button'

@@ -52,140 +52,140 @@ export const Content = styled(Box)<BoxProps>(({ theme }) => ({
 export const DateRangePickerContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'isMobile',
 })<BoxProps>(() => ({
-  paddingBottom: 28,
-  margin: '0 -24px',
-  minWidth: 354,
-
-  '&& .rdrCalendarWrapper': {
+  '& .rdrCalendarWrapper': {
     background: '#1F49D1',
+    borderRadius: 40,
     padding: '10px 20px',
     width: '100%',
-    borderRadius: 40,
   },
 
-  ' .rdrDateDisplayWrapper': {
+  '& .rdrDateDisplayWrapper': {
     display: 'none',
   },
 
-  ' .rdrMonthPicker': {
-    width: 80,
-  },
-
-  ' .rdrMonthPicker > select': {
-    color: '#fafafa',
-    fontSize: 34,
-    fontWeight: 600,
-    textAlign: 'left',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-  },
-
-  ' .rdrMonthPicker > select > option': {
-    color: '#1E3280',
-    fontSize: 14,
-  },
-
-  ' .rdrMonthAndYearPickers': {
-    position: 'absolute',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    left: 0,
-  },
-
-  ' .rdrMonthAndYearWrapper': {
-    padding: 0,
-    display: 'flex',
-    justifyContent: 'flex-end',
-    position: 'relative',
-    margin: '20px 0 40px',
-  },
-
-  ' .rdrMonthAndYearPickers > span > select': {
-    padding: '0px 30px 4px 0px',
-    pointerEvents: 'none',
-    '-webkit-appearance': 'none',
-    '-moz-appearance': 'none',
-    appearance: 'none',
-    background: 'url("") no-repeat right center',
-  },
-
-  ' .rdrYearPicker > select': {
-    color: '#8FA4E8',
-  },
-
-  ' .rdrYearPicker > select > option': {
-    color: '#1E3280',
-  },
-
-  ' .rdrMonths': {
-    alignItems: 'center',
-  },
-
-  ' .rdrMonth': {
-    width: '-webkit-fill-available',
-    padding: '0 0 20px',
-  },
-
-  ' .rdrDay > span > span': {
+  '& .rdrDay > span > span': {
     color: '#fafafa',
   },
 
-  ' .rdrDayPassive > span > span': {
-    color: '#8FA4E8',
-  },
-
-  ' .rdrDayDisabled': {
+  '& .rdrDayDisabled': {
     backgroundColor: 'unset',
     cursor: 'auto',
   },
 
-  ' .rdrDayDisabled > span': {
-    filter: 'unset',
-  },
-
-  ' .rdrDayDisabled > .rdrInRange': {
-    background: 'none',
-  },
-
-  ' .rdrDayDisabled > .rdrDayNumber > span': {
+  '& .rdrDayDisabled > .rdrDayNumber > span': {
     color: '#8FA4E8 !important',
   },
 
-  ' .rdrNextPrevButton': {
-    width: 52,
-    height: 48,
-    margin: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: '1px solid #fafafa',
+  '& .rdrDayDisabled > .rdrInRange': {
     background: 'none',
+  },
+
+  '& .rdrDayDisabled > span': {
+    filter: 'unset',
+  },
+
+  '& .rdrDayPassive > span > span': {
+    color: '#8FA4E8',
+  },
+
+  '& .rdrMonth': {
+    padding: '0 0 20px',
+    width: '-webkit-fill-available',
+  },
+
+  '& .rdrMonthAndYearPickers': {
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+    left: 0,
+    position: 'absolute',
+  },
+
+  '& .rdrMonthAndYearPickers > span > select': {
+    WebkitAppearance: 'none',
+    MozAppearance: 'none',
+    appearance: 'none',
+    background: 'url("") no-repeat right center',
+    padding: '0px 30px 4px 0px',
+    pointerEvents: 'none',
+  },
+
+  '& .rdrMonthAndYearWrapper': {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    margin: '20px 0 40px',
+    padding: 0,
+    position: 'relative',
+  },
+
+  '& .rdrMonthPicker': {
+    width: 80,
+  },
+
+  '& .rdrMonthPicker > select': {
     color: '#fafafa',
+    fontSize: 34,
+    fontWeight: 600,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    textAlign: 'left',
+    whiteSpace: 'nowrap',
+  },
+
+  '& .rdrMonthPicker > select > option': {
+    color: '#1E3280',
+    fontSize: 14,
+  },
+
+  '& .rdrMonths': {
+    alignItems: 'center',
+  },
+
+  '& .rdrNextButton > i': {
+    borderColor: 'transparent transparent transparent #fafafa',
+    borderWidth: '7px 3px 6px 10px',
+  },
+
+  '& .rdrNextPrevButton': {
+    alignItems: 'center',
+    background: 'none',
+    border: '1px solid #fafafa',
     borderRadius: '40%',
+    color: '#fafafa',
+    display: 'flex',
+    height: 48,
+    justifyContent: 'center',
+    margin: 0,
+    width: 52,
     zIndex: 10,
     '&:hover': {
       background: '1px solid red',
     },
   },
 
-  ' .rdrNextPrevButton > i': {
+  '& .rdrNextPrevButton > i': {
     margin: 0,
   },
 
-  ' .rdrNextButton > i': {
-    borderWidth: '7px 3px 6px 10px',
-    borderColor: 'transparent transparent transparent #fafafa',
-  },
-
-  ' .rdrPprevButton': {
+  '& .rdrPprevButton': {
     marginRight: 8,
   },
 
-  ' .rdrPprevButton > i': {
-    borderWidth: '7px 10px 6px 3px',
+  '& .rdrPprevButton > i': {
     borderColor: 'transparent #fafafa transparent transparent',
+    borderWidth: '7px 10px 6px 3px',
   },
+
+  '& .rdrYearPicker > select': {
+    color: '#8FA4E8',
+  },
+
+  '& .rdrYearPicker > select > option': {
+    color: '#1E3280',
+  },
+
+  margin: '0 -24px',
+  minWidth: 354,
+  paddingBottom: 28,
 }))
 
 export const DetailsContainer = styled(Card)<CardProps>(({ theme }) => ({
