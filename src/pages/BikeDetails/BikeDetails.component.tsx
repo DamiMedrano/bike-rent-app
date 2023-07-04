@@ -186,7 +186,7 @@ const BikeDetails = ({ bike }: BikeDetailsProps) => {
             <Typography variant='h1' fontSize={24} marginBottom={1.25} fontWeight={800}>
               Select date and time
             </Typography>
-            <DateRangePickerContainer>
+            <DateRangePickerContainer data-testid='calendar'>
               <DateRange onChange={handleRangeChange} ranges={range as any} minDate={currentDate} />
             </DateRangePickerContainer>
             <Typography variant='h2' fontSize={16} marginBottom={1.25}>

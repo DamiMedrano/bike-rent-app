@@ -55,6 +55,21 @@ describe('BikeDetails page', () => {
     const bookingButtonElement = screen.getByTestId('bike-booking-button')
     expect(bookingButtonElement).toBeInTheDocument()
   })
+
+  it('should not render the SuccessMessageBox initially', () => {
+    const successMessageBoxElement = screen.queryByTestId('success-message-container')
+    expect(successMessageBoxElement).not.toBeInTheDocument()
+  })
+
+  it('should render the OverviewContainer initially', async () => {
+    const overviewContainerElement = screen.getByTestId('bike-overview-container')
+    expect(overviewContainerElement).toBeInTheDocument()
+  })
+
+  it('renders element with id "calendar"', () => {
+    const calendarElement = screen.getByTestId('calendar')
+    expect(calendarElement).toBeInTheDocument()
+  })
 })
 
 describe('BikeDetails utils', () => {
