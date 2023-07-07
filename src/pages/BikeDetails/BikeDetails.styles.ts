@@ -65,6 +65,11 @@ export const DateRangePickerContainer = styled(Box)<BoxProps>(({ theme }) => ({
     color: '#fafafa',
   },
 
+  '& .rdrDayToday > .rdrInRange': {
+    borderBottomLeftRadius: 16,
+    borderTopLeftRadius: 16,
+  },
+
   '& .rdrDayDisabled': {
     backgroundColor: 'unset',
     cursor: 'auto',
